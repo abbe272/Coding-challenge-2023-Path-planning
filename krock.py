@@ -114,6 +114,13 @@ def visualize(cubes, path):
     ax.set_xticks([])
     ax.set_yticks([])
     ax.set_zticks([])
+    ax.xaxis.pane.fill = False
+    ax.yaxis.pane.fill = False
+    ax.zaxis.pane.fill = False
+    ax.xaxis.pane.set_edgecolor('w')
+    ax.yaxis.pane.set_edgecolor('w')
+    ax.zaxis.pane.set_edgecolor('w')
+    ax.set_axis_off()
     ax.set(xlim=(-3,3), ylim=(-3,3), zlim=(-2.3,2.3))
     plt.show()
 
@@ -282,9 +289,9 @@ cubes.pop(list(cubes.keys())[0])
 # sample points
 low_corner  = data['domain_lower_corner']
 high_corner = data['domain_upper_corner']
-x_samp = np.random.uniform(low = low_corner[0]+0.25, high = high_corner[0]-0.25, size = (3000,))
-y_samp = np.random.uniform(low = low_corner[1]+0.25, high = high_corner[1]-0.25, size = (3000,))
-z_samp = np.random.uniform(low = low_corner[2]+0.25, high = high_corner[2]-0.25, size = (3000,))
+x_samp = np.random.uniform(low = low_corner[0]+0.25, high = high_corner[0]-0.25, size = (500,))
+y_samp = np.random.uniform(low = low_corner[1]+0.25, high = high_corner[1]-0.25, size = (500,))
+z_samp = np.random.uniform(low = low_corner[2]+0.25, high = high_corner[2]-0.25, size = (500,))
 
 # remove all points that accidently ended up inside an obstacle cube
 remove_index = []
@@ -333,7 +340,7 @@ print(path)
 print(total_distance)
 
 # lists x, y, and z points for all edge nodes
-path_edges = [[x_samp[i] for i in vag], [y_samp[i] for i in vag], [z_samp[i] for i in vag]]
+path_edges = [[x_samp[i] for i in path], [y_samp[i] for i in path], [z_samp[i] for i in path]]
 
 # uncomment to visualize the cubes and path 
 visualize(show_cubes, path_edges)
