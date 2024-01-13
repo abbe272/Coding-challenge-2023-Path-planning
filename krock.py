@@ -291,15 +291,9 @@ def dijkstra(graph, source, cost=lambda u,v: 1):
     return dijkdict
 
 def weight(edge1, edge2):
-    #print([x_samp[edge1], y_samp[edge1], z_samp[edge1]])
-    #print([x_samp[edge2], y_samp[edge2], z_samp[edge2]])
+    
     distance = ((z_samp[edge2] - z_samp[edge1])**2 + (y_samp[edge2] - y_samp[edge1])**2 + (x_samp[edge2] - x_samp[edge1])**2)**(1/2)
     return distance
-
-#print('***')
-#print(collision([[1,1,1],[-1,1,1],[1,-1,1],[-1,-1,1], [1,1,-1],[-1,1,-1],[1,-1,-1],[-1,-1,-1]], [10,0,0], [11,0,0]))
-#print(collision([[1,1,1],[-1,1,1],[1,-1,1],[-1,-1,1], [1,1,-1],[-1,1,-1],[1,-1,-1],[-1,-1,-1]], [-10,0,0], [10,0,0]))
-#print(collision([[1,1,1],[-1,1,1],[1,-1,1],[-1,-1,1], [1,1,-1],[-1,1,-1],[1,-1,-1],[-1,-1,-1]], [0,0,-10], [0,0,10]))
 
 
 cube_centers = [dict['start_position']] + dict['cube_positions:'] + [dict['goal_position']]
@@ -307,7 +301,6 @@ hcw = 0.5*float(dict['cube_width']) # half cube width
 
 cubes = cube_corners(cube_centers, 2*hcw)
 show_cubes = cube_corners(cube_centers, hcw)
-# print(cubes)
 draw_cubes(show_cubes)
 
 cubes.pop(list(cubes.keys())[-1])
@@ -319,8 +312,6 @@ high_corner = dict['domain_upper_corner']
 x_samp = np.random.uniform(low = low_corner[0]+0.25, high = high_corner[0]-0.25, size = (400,))
 y_samp = np.random.uniform(low = low_corner[1]+0.25, high = high_corner[1]-0.25, size = (400,))
 z_samp = np.random.uniform(low = low_corner[2]+0.25, high = high_corner[2]-0.25, size = (400,))
-
-# print(len(x_samp))
 
 remove_index = []
 for i in range(len(x_samp)):
@@ -338,17 +329,13 @@ z_samp = np.append(z_samp, 0.54373)
 x_samp = np.append(x_samp, 0.123147)
 y_samp = np.append(y_samp, 2.635865)
 z_samp = np.append(z_samp, 0.321962)
-
-# print(len(x_samp))
-
-#ax.scatter(x_samp, y_samp, z_samp)
 # sample points slut
+
 
 edges = []
 for i in range(len(x_samp)):
     for j in range(len(x_samp)):
         if i != j:
-            #print('*')
             krockar = False
             for cube in cubes.values():
                 if collision(cube, [x_samp[i], y_samp[i], z_samp[i]], [x_samp[j], y_samp[j], z_samp[j]]):# and tuple([i,j]) not in edges and tuple([j,i]) not in edges:
@@ -359,24 +346,12 @@ for i in range(len(x_samp)):
                 edges.append(tuple([i,j]))
 
 
-#print(edges)
 G = Graph(start=edges)
-#print(max(list(G._adjlist.keys())))
-#print(len(x_samp)-2)
 path = dijkstra(G, len(x_samp)-2, weight)
-#print('---')
-#print(path[len(x_samp)-1])
 vag = path[len(x_samp)-1]['path']
 print(vag)
-#print(len(x_samp))
 vag_kanter = [[x_samp[i] for i in vag], [y_samp[i] for i in vag], [z_samp[i] for i in vag]]
 
-#print(vag_kanter)
-
-# for edge in edges:
-# x = [x_samp[edge[0]], x_samp[edge[1]]]
-# y = [y_samp[edge[0]], y_samp[edge[1]]]
-# z = [z_samp[edge[0]], z_samp[edge[1]]]
 
 x = vag_kanter[0]
 y = vag_kanter[1]
@@ -385,16 +360,11 @@ z = vag_kanter[2]
 vertices = []
 for i in range(len(x)-1):
     vertices.append([i, i+1])
-#print(vertices)
+
 
 tupleList = list(zip(x, y, z))
-
 poly3d = [[tupleList[vertices[ix][iy]] for iy in range(len(vertices[0]))] for ix in range(len(vertices))]
-
-
-
 ax.add_collection3d(Line3DCollection(poly3d, colors='k', linewidths=3,))
 
+
 plt.show()
-
-
