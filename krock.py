@@ -64,7 +64,7 @@ def cube_corners(cube_centers, half_size):
     return cubes
 
 # takes all the cube corner points and the points of each node in the path
-def visualize(cubes, path):
+def visualize(cubes, path, dist):
     from mpl_toolkits.mplot3d import Axes3D
     from mpl_toolkits.mplot3d.art3d import Poly3DCollection
     from mpl_toolkits.mplot3d.art3d import Line3DCollection
@@ -120,6 +120,7 @@ def visualize(cubes, path):
     ax.xaxis.pane.set_edgecolor('w')
     ax.yaxis.pane.set_edgecolor('w')
     ax.zaxis.pane.set_edgecolor('w')
+    ax.text2D(0.3, 0.75, "Total path legnth: " + str(round(dist, 1)), transform=ax.transAxes)
     ax.set_axis_off()
     ax.set(xlim=(-3,3), ylim=(-3,3), zlim=(-2.3,2.3))
     plt.show()
@@ -343,4 +344,4 @@ print(total_distance)
 path_edges = [[x_samp[i] for i in path], [y_samp[i] for i in path], [z_samp[i] for i in path]]
 
 # uncomment to visualize the cubes and path 
-visualize(show_cubes, path_edges)
+visualize(show_cubes, path_edges, total_distance)
