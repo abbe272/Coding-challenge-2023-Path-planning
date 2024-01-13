@@ -120,7 +120,7 @@ def visualize(cubes, path, dist):
     ax.xaxis.pane.set_edgecolor('w')
     ax.yaxis.pane.set_edgecolor('w')
     ax.zaxis.pane.set_edgecolor('w')
-    ax.text2D(0.3, 0.75, "Total path legnth: " + str(round(dist, 1)), transform=ax.transAxes)
+    ax.text2D(0.3, 0.75, "Total path length: " + str(round(dist, 1)), transform=ax.transAxes)
     ax.set_axis_off()
     ax.set(xlim=(-3,3), ylim=(-3,3), zlim=(-2.3,2.3))
     plt.show()
