@@ -337,11 +337,11 @@ pathdict = dijkstra(G, len(x_samp)-2, weight)
 path = pathdict[len(x_samp)-1]['path']
 # and the total distance
 total_distance = pathdict[len(x_samp)-1]['cost']
-print(path)
 print(total_distance)
 
 # lists x, y, and z points for all edge nodes
 path_edges = [[x_samp[i] for i in path], [y_samp[i] for i in path], [z_samp[i] for i in path]]
+print(path_edges)
 
 # uncomment to visualize the cubes and path 
-visualize(show_cubes, path_edges, total_distance)
+# visualize(show_cubes, path_edges, total_distance)
